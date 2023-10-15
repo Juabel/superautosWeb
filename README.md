@@ -24,7 +24,7 @@ Ondoren, superautosweb-db-1 exekutatuko dugu kontsolan sartzeko hau jarriz:
 $ docker exec -it superautosweb-db-1 /bin/bash
 ```
 
-Gero mysql sartuko gara honako hau idatziz kontsolan:
+Gero mysql sartuko gara honako hau idatziz kontsolan. Pasahitza 'root' da:
 ```bash
 $ mysql -u root -p
 ```
