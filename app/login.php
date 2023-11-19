@@ -54,11 +54,37 @@
 </html>
 
 <script>
-		 
+
+	const artxiboizena = 'log.json'; 
+	const tokia = 'login.php'
+	function alertToLog(message) {
+    return {
+		timestamp: new Date().toLocaleString(),
+        message: message,
+		tokia: tokia
+        // Otros campos que desees agregar
+   		};
+    	
+	}
+	function logToFile(logObject, artxiboizena) {
+    // Recupera los registros existentes del almacenamiento local
+    const existingLogs = JSON.parse(localStorage.getItem(artxiboizena)) || [];
+
+    // Agrega el nuevo registro
+    existingLogs.push(logObject);
+
+    // Guarda los registros actualizados en el almacenamiento local con indentación de dos espacios
+    localStorage.setItem(artxiboizena, JSON.stringify(existingLogs, null, 2));
+
+	// Muestra los registros en la consola con la misma indentación
+	console.log(JSON.stringify(existingLogs, null, 2));
+	}
+	
+
 	function validate() {		
 
 		//Funtzio honetan konprobatuko dugu formatu guztiak betetzen direla. Horretarako formatuak eta informazioa gordeko ditugu lehenengo eta ondoren konprobaketak egingo ditugu
-
+	
 		var izena = document.getElementById("izen_abizenak").value;
 		var izenaFormat = /[^0-9]/g;
 	
@@ -82,10 +108,16 @@
 		
 		if(izena.length == 0){
 			alert("Ez duzu ezer jarri izen-abizenak zatian!");
+			const alertMessage = "Ez duzu ezer jarri izen-abizenak zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		else if(!izenaFormat.test(izena)){
 			alert("Ezin dira zenbakiak erabili izen-abizenak jartzeko!");
+			const alertMessage = "Ezin dira zenbakiak erabili izen-abizenak jartzeko!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		
@@ -100,30 +132,48 @@
 			letra = letra.substring(zenb, zenb+1);
 			if (letra != letr) {
 				alert("NAN zenbakia txarto dago!");
+				const alertMessage = "NAN zenbakia txarto dago!";
+				const logData = alertToLog(alertMessage);
+				logToFile(logData, artxiboizena);
 				return false;
 			}
 			
 		}else{
 			alert("NAN ez du balio!");
+			const alertMessage = "NAN ez du balio!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		
 		if (telefonoa.length != 9){
 			alert("Telefono zenbakiak bakarrik 9 zenbaki dituzte!");
+			const alertMessage = "Telefono zenbakiak bakarrik 9 zenbaki dituzte!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		if (izenaFormat.test(telefonoa)){
 			alert("Bakarrik zenbakiak erabili ahal dira!");
+			const alertMessage = "Bakarrik zenbakiak erabili ahal dira!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		if (telefonoa < 0){
 			alert("Bakarrik zenbaki positiboak erabili ahal dira!");
+			const alertMessage = "Bakarrik zenbaki positiboak erabili ahal dira!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		
 		var matchArray = date.match(datePattern);
 		if (matchArray == null) {
 			alert("Ez da dataren formatua!");
+			const alertMessage = "Ez da dataren formatua!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
@@ -141,33 +191,54 @@
 
 		if (month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
 			alert("Ez da dataren formatua!");
+			const alertMessage = "Ez da dataren formatua!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		
 		if (!mailFormat.test(mail)) {
 			alert("Emaila ez du balio!");
+			const alertMessage = "Emaila ez du balio!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
 		if(erabiltzaileIzena.length == 0){
 			alert("Ez duzu ezer jarri erabiltzaile izena zatian!");
+			const alertMessage = "Ez duzu ezer jarri erabiltzaile izena zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		if (erabiltzaileIzena.length > 16){
 			alert("Erabiltzaile izena luzeegia da!");
+			const alertMessage = "Erabiltzaile izena luzeegia da!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
 		if (pasahitzaFormat.test(pasahitza)) {
 			alert("Pasahitza karaktere arraroak ditu!");
+			const alertMessage = "Pasahitza karaktere arraroak ditu!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		if (pasahitza.length < 8){
 			alert("Pasahitza laburregia da!");
+			const alertMessage = "Pasahitza laburregia da!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 		if (pasahitza.length > 16){
 			alert("Pasahitza luzeegia da!");
+			const alertMessage = "Pasahitza luzeegia da!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
@@ -175,8 +246,10 @@
 		
 		let nireForm = document.getElementById("formularioa");
 		nireForm.submit();
-
+		alert("Erabiltzailea egoki erregistratu da");
+		const alertMessage = "Erabiltzailea egoki erregistratu da";
+		const logData = alertToLog(alertMessage);
+		logToFile(logData, artxiboizena);
 		return true;
 	}
-
 </script>

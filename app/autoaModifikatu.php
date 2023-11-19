@@ -77,7 +77,34 @@
 </html>
 
 <script>
-		 
+	const artxiboizena = 'log.json';
+	const tokia = 'autoaModifikatu.php' 
+	function alertToLog(message) {
+    return {
+		timestamp: new Date().toLocaleString(),
+        message: message,
+		tokia: tokia
+        // Otros campos que desees agregar
+   		};
+    	
+	}
+
+
+	function logToFile(logObject, artxiboizena) {
+    // Recupera los registros existentes del almacenamiento local
+    const existingLogs = JSON.parse(localStorage.getItem(artxiboizena)) || [];
+
+    // Agrega el nuevo registro
+    existingLogs.push(logObject);
+
+    // Guarda los registros actualizados en el almacenamiento local con indentación de dos espacios
+    localStorage.setItem(artxiboizena, JSON.stringify(existingLogs, null, 2));
+
+	// Muestra los registros en la consola con la misma indentación
+	console.log(JSON.stringify(existingLogs, null, 2));
+	}
+
+
 	function baieztatu() {
 
 		//Hemen baieztatuko dugu administratzailea ziur badago autoa ezabatu nahi duela
@@ -103,34 +130,55 @@
 		
         if(irudia.length == 0){
 			alert("Ez duzu ezer jarri irudia zatian!");
+			const alertMessage = "Ez duzu ezer jarri irudia zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
         if(marka.length == 0){
 			alert("Ez duzu ezer jarri marka zatian!");
+			const alertMessage = "Ez duzu ezer jarri marka zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
         if(izena.length == 0){
 			alert("Ez duzu ezer jarri izena zatian!");
+			const alertMessage = "Ez duzu ezer jarri izena zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
         if(potentzia.length == 0){
 			alert("Ez duzu ezer jarri potentzia zatian!");
+			const alertMessage = "Ez duzu ezer jarri potentzia zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
         else if(zenbakiFormat.test(potentzia)){
 			alert("Ezin dira hizkiak erabili potentzia jartzeko!");
+			const alertMessage = "Ezin dira hizkiak erabili potentzia jartzeko!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
 		if(prezioa.length == 0){
 			alert("Ez duzu ezer jarri prezioa zatian!");
+			const alertMessage = "Ez duzu ezer jarri prezioa zatian!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
         else if(zenbakiFormat.test(prezioa)){
 			alert("Ezin dira hizkiak erabili prezioa jartzeko!");
+			const alertMessage = "Ezin dira hizkiak erabili prezioa jartzeko!";
+			const logData = alertToLog(alertMessage);
+			logToFile(logData, artxiboizena);
 			return false;
 		}
 
@@ -138,7 +186,9 @@
 		
 		let nireForm = document.getElementById("formularioa");
 		nireForm.submit();
-
+		const alertMessage = "Autoa modifikatu da!";
+		const logData = alertToLog(alertMessage);
+		logToFile(logData, artxiboizena);
 		return true;
 	}
 
