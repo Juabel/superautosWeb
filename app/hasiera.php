@@ -5,22 +5,7 @@
 	//Sesioa hasiko dugu eta ondoren konprobatuko dugu erabiltzailea web sisteman sartuta dagoen edo ez.
 	session_start();
 
-	if (!isset($_SESSION['erabiltzaile'])){
-		echo '		
-			<script>
-				deslogeatu();
-			</script>
-		';
-	}
-	else{
-		$username = $_SESSION['erabiltzaile'];
-		echo "<div id='erabil' data-izena='$username'></div>";
-		echo '		
-			<script>
-				logeatu();
-			</script>
-		';
-	}
+	
 
 	//Auto guztien informazioa gordeko ditugu
 
@@ -189,7 +174,24 @@
 			<?php endforeach; ?>
 
 		</table>
-
+		<?php
+		if (!isset($_SESSION['erabiltzaile'])){
+			echo '		
+				<script>
+					deslogeatu();
+				</script>
+			';
+		}
+		else{
+			$username = $_SESSION['erabiltzaile'];
+			echo "<div id='erabil' data-izena='$username'></div>";
+			echo '		
+				<script>
+					logeatu();
+				</script>
+			';
+		}
+		?>
 	</body>
 
 </html>
